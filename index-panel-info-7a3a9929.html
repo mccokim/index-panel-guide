@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>leyu · 资料索引与整理框架</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fafafa;
+      color: #1e1e1e;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      padding: 0 1.5rem;
+    }
+
+    .page-wrap {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 3rem 0;
+    }
+
+    /* hero / 开场短句 */
+    .opening {
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid #e6e6e6;
+      padding-bottom: 1.75rem;
+    }
+
+    .opening-marker {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #7f8c8d;
+      margin-bottom: 0.75rem;
+    }
+
+    .opening h1 {
+      font-size: 2.4rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #111;
+      margin-bottom: 0.75rem;
+    }
+
+    .opening p {
+      font-size: 1.05rem;
+      color: #3b3b3b;
+      max-width: 600px;
+    }
+
+    .opening p a {
+      color: #2c3e50;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #bcbcbc;
+      transition: text-decoration-color 0.2s;
+    }
+
+    .opening p a:hover {
+      text-decoration-color: #2c3e50;
+    }
+
+    /* 承接段落 */
+    .context {
+      margin-bottom: 3.5rem;
+    }
+
+    .context h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #2c2c2c;
+      margin-bottom: 1rem;
+      border-left: 3px solid #c0c0c0;
+      padding-left: 1rem;
+    }
+
+    .context p {
+      margin-bottom: 1.2rem;
+      color: #3a3a3a;
+      font-size: 1rem;
+    }
+
+    .context p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 特点列表 */
+    .feature-grid {
+      margin-bottom: 4rem;
+    }
+
+    .feature-grid h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: #1a1a1a;
+    }
+
+    .feature-grid ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem 2rem;
+    }
+
+    .feature-grid li {
+      border-top: 1px solid #ececec;
+      padding-top: 1rem;
+    }
+
+    .feature-grid li strong {
+      display: block;
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: #232323;
+    }
+
+    .feature-grid li span {
+      font-size: 0.9rem;
+      color: #5a5a5a;
+      display: block;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 520px) {
+      .feature-grid ul {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    /* 场景 + 提示 (合并为一个简短模块) */
+    .scene-note {
+      margin-bottom: 3.5rem;
+      background: #f3f3f3;
+      padding: 1.8rem 1.8rem 1.8rem 2rem;
+      border-radius: 0;
+      border-left: 3px solid #9e9e9e;
+    }
+
+    .scene-note p {
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 0.75rem;
+    }
+
+    .scene-note p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .scene-note .tag {
+      display: inline-block;
+      background: #d8d8d8;
+      color: #2e2e2e;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.6rem;
+      margin-right: 0.35rem;
+      text-transform: uppercase;
+    }
+
+    /* FAQ 摘要——极简卡片，非手风琴 */
+    .faq-mini {
+      margin-bottom: 3rem;
+    }
+
+    .faq-mini h4 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #1e1e1e;
+      margin-bottom: 1rem;
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.1rem;
+    }
+
+    .faq-item .q {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #2b2b2b;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item .a {
+      font-size: 0.9rem;
+      color: #545454;
+      line-height: 1.55;
+    }
+
+    /* 温和结尾 */
+    .closing {
+      padding-top: 1.5rem;
+      border-top: 1px solid #e2e2e2;
+      font-size: 0.9rem;
+      color: #4f4f4f;
+    }
+
+    .closing p {
+      margin-bottom: 0.5rem;
+    }
+
+    .closing p a {
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #aaaaaa;
+      transition: text-decoration-color 0.2s;
+    }
+
+    .closing p a:hover {
+      text-decoration-color: #1a1a1a;
+    }
+
+    .closing .note {
+      color: #777;
+      font-size: 0.82rem;
+      margin-top: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <!-- 开场短句 -->
+    <div class="opening">
+      <div class="opening-marker">索引 · 整理</div>
+      <h1>从资料堆积到</h1>
+      <h1>可检索的结构</h1>
+      <p>
+        一份面向信息工作者的轻量框架，聚焦在如何将零散资料转化为有序节点。
+        以 <a href="https://index-panel-leyu.com">leyu</a> 作为锚点，建立分类、标签与回溯路径。
+      </p>
+    </div>
+
+    <!-- 承接段落 -->
+    <div class="context">
+      <h2>为什么需要索引式的整理</h2>
+      <p>
+        大多数人面对的信息量早已超出个人记忆的边界。文件夹 + 关键词搜索的二元模式，在跨项目、跨时间检索时频繁失效。
+        索引思维的核心不是“存好”，而是“能再次找到”——这要求每条资料都应附带可推导的上下文标记。
+      </p>
+      <p>
+        索引面板的方式是：为每份资料赋予一个独立标识，并维护一组关系标签。源文件、笔记、摘录、图表被统一编址，
+        不再依赖“我记得它在哪个文件夹”。这套方法已经在多个文档密集型团队中运行超过一年。
+      </p>
+    </div>
+
+    <!-- 特点列表（四项） -->
+    <div class="feature-grid">
+      <h3>索引面板的设计要点</h3>
+      <ul>
+        <li>
+          <strong>标识独立</strong>
+          <span>每个资料条目获得唯一 ID，不与文件名或路径耦合；移动或重命名后链接依然有效。</span>
+        </li>
+        <li>
+          <strong>标签分层</strong>
+          <span>支持项目级、领域级、临时性标签三级体系，按需筛选，避免标签泛滥。</span>
+        </li>
+        <li>
+          <strong>关联显式化</strong>
+          <span>条目之间可以建立“引用/被引用”“前置/后置”“版本衍生”关系，检索时自动展开关联链。</span>
+        </li>
+        <li>
+          <strong>轻量接入</strong>
+          <span>不依赖特定软件，基于纯文本或 Markdown 即可运行；索引面板本身只提供视图与查询逻辑。</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 场景 + 提示 -->
+    <div class="scene-note">
+      <p>
+        <span class="tag">场景</span> 研究笔记、产品文档、设计归档、代码片段库、个人知识库。任何需要跨时间维度调取的资料集合。
+      </p>
+      <p>
+        <span class="tag">提示</span> 索引不是存储的替代品，而是存储之上的视图层。如果文件夹结构本身已经足够清晰，索引层可以很薄；
+        如果信息经常跨越分类边界，索引层就需要更丰富的标签关系。
+      </p>
+    </div>
+
+    <!-- FAQ 摘要（三项） -->
+    <div class="faq-mini">
+      <h4>常见疑问</h4>
+      <div class="faq-item">
+        <div class="q">索引面板与标签工具有何不同？</div>
+        <div class="a">大多数标签工具只提供一对多分类，索引面板额外记录了条目间的关联方向和权重，可以实现因果、版本、参考等关系检索。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">需要多少初始投入？</div>
+        <div class="a">如果现有资料已经有清晰命名和目录，建立第一版索引约需数小时；之后维护成本大约每周 15–30 分钟。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">是否适合团队协作？</div>
+        <div class="a">索引文件可以纳入版本控制。团队成员各自维护本地索引，也可共享同一份索引文件通过 diff 合并变更。</div>
+      </div>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="closing">
+      <p>
+        资料整理的目标不是消除混乱，而是让混乱中浮现出可重访的路径。
+        关于索引面板的更多实践记录与参考实现，可以在 <a href="https://index-panel-leyu.com">leyu</a> 的说明中找到。
+      </p>
+      <p class="note">
+        以上内容基于真实项目经验提炼，不包含任何保证或承诺，仅作为方法参考。
+      </p>
+    </div>
+  </div>
+</body>
+</html>
